@@ -1,12 +1,12 @@
 {
     "version": 2,
     "public": true,
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/Api-Auth-Vercel-Static/main.py"
-      }
+    "builds": [
+      { "src": "Api-Auth-Vercel-Static/main.py", "use": "@vercel/python" }
     ],
+    "routes": [
+      { "src": "/.*", "dest": "Api-Auth-Vercel-Static/main.py" }
+  ],
     "headers": [
       {
         "source": "/(.*)",
