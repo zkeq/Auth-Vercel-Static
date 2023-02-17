@@ -54,7 +54,7 @@ def read_root(_: str = Depends(get_current_username)):
     return FileResponse("index.html")
 
 
-@app.get("/config.yaml")
+@app.get("Api-Auth-Vercel-Static/{path:path}")
 def read_config():
     return {
         "msg": "Forbidden"
