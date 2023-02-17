@@ -1,29 +1,16 @@
 {
-    "version": 2,
-    "public": true,
-    "builds": [
-      { "src": "Api-Auth-Vercel-Static/main.py", "use": "@vercel/python" }
-    ],
-    "routes": [
-      { "src": "/.*", "dest": "Api-Auth-Vercel-Static/main.py" }
+  "version": 2,
+  "public": true,
+  "builds": [
+    {
+      "src": "Api-Auth-Vercel-Static/main.py",
+      "use": "@vercel/python"
+    }
   ],
-    "headers": [
-      {
-        "source": "/(.*)",
-        "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
-          {
-            "key": "Access-Control-Allow-Methods",
-            "value": "*"
-          },
-          {
-            "key": "Access-Control-Allow-Headers",
-            "value": "*"
-          }
-        ]
-      }
-    ]
-  }
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "Api-Auth-Vercel-Static/main.py"
+    }
+  ]
+}
