@@ -59,9 +59,7 @@ def read_root(path: str, _: str = Depends(get_current_username)):
         }
     # 如果是文件夹
     if os.path.isdir(path):
-        return {
-            "message": f"{path} is a directory"
-        }
+        path = os.path.join(path, "index.html")
     return FileResponse(path)
 
 
