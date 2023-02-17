@@ -52,14 +52,14 @@ def read_config():
 # All routes
 @app.get("/{path:path}")
 def read_root(path: str, _: str = Depends(get_current_username)):
+    # 如果是文件夹
+    if os.path.isdir(path):
+        path = os.path.join(path, "index.html")
     # 如果不存在
     if not os.path.exists(path):
         return {
             "message": f"{path} not found"
         }
-    # 如果是文件夹
-    if os.path.isdir(path):
-        path = os.path.join(path, "index.html")
     return FileResponse(path)
 
 
