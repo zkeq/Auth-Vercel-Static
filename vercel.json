@@ -4,7 +4,7 @@
     "rewrites": [
       {
         "source": "/(.*)",
-        "destination": "/api/main.py"
+        "destination": "/Api-Auth-Vercel-Static/main.py"
       }
     ],
     "headers": [
