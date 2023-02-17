@@ -26,8 +26,8 @@ def get_current_username(credentials: HTTPBasicCredentials = Depends(security)):
     is_correct_username = False
     is_correct_password = False
     for user in user_list:
-        correct_username_bytes = user["username"]
-        correct_password_bytes = user["password"]
+        correct_username_bytes = user["username"].encode("utf8")
+        correct_password_bytes = user["password"].encode("utf8")
         #  secrets.compare_digest
         is_correct_username = secrets.compare_digest(
             current_username_bytes, correct_username_bytes
