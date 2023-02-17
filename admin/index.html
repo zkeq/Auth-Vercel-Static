@@ -1,0 +1,1955 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=yes,viewport-fit=cover">
+    <title>渺软公益CDN - 国内线路加速 jsdelivr cdnjs 开发者自用CDN</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta
+    name="description"
+    content="感谢您使用渺软 CDN，我们为您提供了一个高速、简单、开箱即用的公益 CDN 服务。我们希望能为中国开发者提供一个更好的网站体验，让他们不必再受国外服务商提供的服务质量低下的困扰。"
+  />
+  <meta
+    name="keywords"
+    content="CDN,公益CDN,公益cdn,公益服务,免费服务,开发者,免费CDN,jsd镜像,npm镜像,cdnjs镜像,jsd,npm,cdnjs,渺软公益,Zkeq,公共服务,国内CDN,静态资源加速服务,稳定的CDN,好用的免费CDN,好用的公益服务,加速静态资源,加速js,加速css"
+  />
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="渺软公益CDN">
+  <meta property="og:url" content="https://icodeq.com/index.html">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="渺软公益CDN">
+  <meta property="og:image" content="https://img.onmicrosoft.cn/2022-12-31/1.png">
+
+
+  <meta name="author" content="Zkeq">
+  <meta name="copyright" content="Zkeq">
+
+  <meta property="article:author" content="Zkeq">
+  <meta property="article:tag" content="CDN,公益CDN">
+
+    <link rel="shortcut icon" href="/favicon.svg">
+
+    <script src="https://npm.onmicrosoft.cn/vue@3.2.45/dist/vue.global.js"></script>
+    <script src="https://npm.onmicrosoft.cn/dayjs@1.11.7/dayjs.min.js"></script>
+    <script src="https://npm.onmicrosoft.cn/dayjs@1.11.7/plugin/customParseFormat.js"></script>
+    <script src="https://npm.onmicrosoft.cn/dayjs@1.11.7/plugin/weekday.js"></script>
+    <script src="https://npm.onmicrosoft.cn/dayjs@1.11.7/plugin/localeData.js"></script>
+    <script src="https://npm.onmicrosoft.cn/dayjs@1.11.7/plugin/weekOfYear.js"></script>
+    <script src="https://npm.onmicrosoft.cn/dayjs@1.11.7/plugin/weekYear.js"></script>
+    <script src="https://npm.onmicrosoft.cn/dayjs@1.11.7/plugin/advancedFormat.js"></script>
+    <script src="https://npm.onmicrosoft.cn/ant-design-vue@3.2.15/dist/antd.min.js"></script>
+    <link rel="stylesheet" href="https://npm.onmicrosoft.cn/ant-design-vue@3.2.15/dist/antd.min.css">
+
+    <script src="https://npm.onmicrosoft.cn/echarts@4.9.0/dist/echarts.min.js"></script>
+
+    <script src="https://unpkg.onmicrosoft.cn/axios@1.2.2/dist/axios.min.js"></script>
+
+    <script src="https://jsd.onmicrosoft.cn/npm/dayjs@1/plugin/duration.js"></script>
+    <script>dayjs.extend(window.dayjs_plugin_duration)</script>
+
+
+    <!-- Import style -->
+    <link rel="stylesheet" href="https://unpkg.onmicrosoft.cn/element-plus@2.2.28/dist/index.css" />
+
+    <!-- Import component library -->
+    <script src="https://unpkg.onmicrosoft.cn/element-plus@2.2.28/dist/index.full.js"></script>
+
+
+
+    <!-- <script src="https://jsd.onmicrosoft.cn/npm/dayjs@1/plugin/relativeTime.js"></script>
+    <script>dayjs.extend(window.dayjs_plugin_relativeTime)</script> -->
+
+    <script defer data-domain="cdn.onmicrosoft.cn" src="https://vercel.site.icodeq.com/js/script.js"></script>
+
+    <style>
+        #app,
+        .comment {
+            width: 1040px;
+            margin: 0 auto;
+        }
+
+        /* 页面平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .comment{
+            min-height: 1000px;
+        }
+
+        .title {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .afdian_iframe {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #main {
+            border: 1px solid #f0f0f0;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .ant-typography ol li, .ant-typography ul li{
+            padding: 0;
+        }
+
+        .ant-row, .ant-row:after, .ant-row:before {
+            display: flex;
+            justify-content: space-between;
+        }       
+
+        @media screen and (max-width: 1080px) {
+            #app,
+            .comment {
+                width: 800px;
+                margin: 0 auto;
+            }
+            #main{
+                width: 800px !important;
+            }
+            .ant-card{
+                width: 800px !important;
+            }
+            .ant-col{
+                margin-top: 10px;
+            }
+            .ant-progress-line {
+                margin-left: -15px;
+            }
+        }
+
+        @media screen and (max-width: 1000px) {
+            #app,
+            .comment {
+                width: 830px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+            #main{
+                width: 800px !important;
+            }
+            .ant-card{
+                width: 800px !important;
+            }
+            .ant-col{
+                margin-top: 10px;
+            }
+        }
+
+
+        @media screen and (max-width: 900px) {
+            #app,
+            .comment {
+                width: 730px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+            #main{
+                width: 700px !important;
+            }
+            .ant-card{
+                width: 700px !important;
+            }
+            .ant-col{
+                margin-top: 10px;
+            }
+        }
+
+
+
+        @media screen and (max-width: 800px) {
+            #app,
+            .comment {
+                width: 630px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+            #main{
+                width: 600px !important;
+            }
+            .ant-card{
+                width: 600px !important;
+            }
+            .ant-col{
+                margin-top: 10px;
+            }
+        }
+
+
+        @media screen and (max-width: 700px) {
+            #app,
+            .comment {
+                width: 530px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+            #main{
+                width: 500px !important;
+                height: 240px !important;
+            }
+            .ant-card{
+                width: 500px !important;
+            }
+            .ant-col{
+                margin-top: 10px;
+            }
+        }
+
+
+
+        @media screen and (max-width: 600px) {
+            #app,
+            .comment {
+                width: 430px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+            #main{
+                width: 400px !important;
+                height: 240px !important;
+            }
+            .ant-card{
+                width: 400px !important;
+            }
+            .ant-col{
+                margin-top: 10px;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            #app,
+            .comment {
+                width: 350px;
+                margin: 0 auto;
+                padding: 0 15px;
+            }
+            #main{
+                width: 320px !important;
+                height: 240px !important;
+            }
+            .ant-card{
+                width: 320px !important;
+            }
+            .ant-col{
+                margin-top: 10px;
+            }
+        }
+
+        @media screen and (max-width: 350px) {
+            #app,
+            .comment {
+                width: 270px;
+                margin: 0 auto;
+                padding: 0 5px;
+            }
+            #main{
+                width: 270px !important;
+                height: 180px !important;
+            }
+            .ant-card{
+                width: 270px !important;
+            }
+            .ant-col{
+                margin-top: 10px;
+            }
+        }
+        .box-card, .el-collapse {
+            max-width: 800px;
+            margin: 10px auto;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <h1 style="display: none;">渺软公益CDN</h1>
+
+
+    <div id="app">
+        <!-- Header -->
+
+        <a-typography-title class="title" :level="2">渺软公益 CDN</a-typography-title>
+        <a-row type="flex" align="middle">
+
+            <a-col :flex="5">
+                <div id="main" style="width: 735px;height:315px;"></div>
+            </a-col>
+            <a-col :flex="2" class="main-right">
+                <a-card title="详情数据" style="width: 295px">
+                    <a-row>
+                        <a-col>
+                            <a-statistic title="总流量（GB）" :precision="2" :value="Detail_ALL.traffic" />
+                        </a-col>
+                        <a-col>
+                            <a-statistic title="总请求数" :value="Detail_ALL.request" style="margin-right: 50px" />
+                        </a-col>
+                    </a-row>
+                    <a-row>
+                        <a-col :span="240">
+                            <a-statistic title="总运行时间" :value="Detail_ALL.seconds"
+                            :formatter="RunnerTime"
+                            />
+                        </a-col>
+                    </a-row>
+                    <a-card-meta>
+                        <template #description>{{Detail_ALL.update}}</template>
+                    </a-card-meta>
+                </a-card>
+            </a-col>
+
+
+            <!-- {{single_details}} -->
+            <a-divider />
+
+        </a-row>
+
+        <!-- {{single_top}} -->
+
+
+        <!--  DayUsage -->
+        <a-typography-title :level="5">24h实时用量</a-typography-title>
+        <a-typography-paragraph>
+            <ul>
+                <a-popover title="jsd.onmicrosoft.cn 流量详情" placement="topLeft">
+                    <template #content>
+                        <p>24h 总流量：{{formatBytes(single_details.jsd.used)}}</p>
+                        <p>24h 限制量：{{formatBytes(single_details.jsd.total)}}</p>
+                        <p>示例地址：<a-typography-link target="_blank"
+                                href="https://jsd.onmicrosoft.cn/gh/lifthrasiir/qr.js@master/qr.js">https://jsd.onmicrosoft.cn/gh/lifthrasiir/qr.js@master/qr.js</a-typography-link>
+                        </p>
+                        <a-typography-paragraph>
+                            <blockquote>
+                                <a-typography-link :onclick="scrollIntoTerm">Services Terms of Use</a-typography-link> 请在本页面底部的评论区第一条查看。
+                            </blockquote>
+                        </a-typography-paragraph>
+                    </template>
+                    <li>
+                        <a-typography-link target="_blank" href="https://jsd.onmicrosoft.cn/@info">https://jsd.onmicrosoft.cn/@info
+                        </a-typography-link> <a-progress :percent="single_details.jsd.percent" />
+                    </li>
+                </a-popover>
+                <a-popover title="npm.onmicrosoft.cn 流量详情" placement="topLeft">
+                    <template #content>
+                        <p>24h 总流量：{{formatBytes(single_details.npm.used)}}</p>
+                        <p>24h 限制量：{{formatBytes(single_details.npm.total)}}</p>
+                        <p>示例地址：<a-typography-link target="_blank"
+                                href="https://npm.onmicrosoft.cn/react@16.7.0/umd/react.production.min.js">https://npm.onmicrosoft.cn/react@16.7.0/umd/react.production.min.js</a-typography-link>
+                        </p>
+                        <a-typography-paragraph>
+                            <blockquote>为了保证使用效率，请在使用本域名时使用准确的版本号。反之将会触发回源并返回302响应，不会使用缓存。
+                            <a-typography-paragraph>
+                                <blockquote>
+                                    <a-typography-link :onclick="scrollIntoTerm">Services Terms of Use</a-typography-link> 请在本页面底部的评论区第一条查看。
+                                </blockquote>
+                            </a-typography-paragraph>
+                        </blockquote>
+                        </a-typography-paragraph>
+                    </template>
+                    <li>
+            
+                        <a-typography-link target="_blank" href="https://npm.onmicrosoft.cn/@info">https://npm.onmicrosoft.cn/@info</a-typography-link>
+                        <a-progress :percent="single_details.npm.percent" />
+            
+                    </li>
+                </a-popover>
+                <a-popover title="cdnjs.onmicrosoft.cn 流量详情" placement="topLeft">
+                    <template #content>
+                        <p>24h 总流量：{{formatBytes(single_details.cdnjs.used)}}</p>
+                        <p>24h 限制量：{{formatBytes(single_details.cdnjs.total)}}</p>
+                        <p>示例地址：<a-typography-link target="_blank"
+                                href="https://cdnjs.onmicrosoft.cn/vue@3.2.45/dist/vue.global.js">https://cdnjs.onmicrosoft.cn/vue@3.2.45/dist/vue.global.js</a-typography-link>
+                        </p>
+                        <a-typography-paragraph>
+                            <blockquote>为了保证使用效率，请在使用本域名时使用准确的版本号。反之将会触发回源并返回302响应，不会使用缓存。
+                            <a-typography-paragraph>
+                                <blockquote>
+                                    <a-typography-link :onclick="scrollIntoTerm">Services Terms of Use</a-typography-link> 请在本页面底部的评论区第一条查看。
+                                </blockquote>
+                            </a-typography-paragraph>
+                        </blockquote>
+                        </a-typography-paragraph>
+                    </template>
+                    <li>
+            
+                        <a-typography-link target="_blank" href="https://cdnjs.onmicrosoft.cn/@info">https://cdnjs.onmicrosoft.cn/@info</a-typography-link>
+                        <a-progress :percent="single_details.cdnjs.percent" />
+            
+                    </li>
+                </a-popover>
+            </ul>
+
+            <a-divider />
+
+        </a-typography-paragraph>
+
+
+        <!-- Abuse -->
+        <a-typography-paragraph>
+    <!-- {{Link_Status}} -->
+    <!-- {{like_dict}} -->
+            <a-typography-title :level="5">大流量TOP100 在线 Abuse</a-typography-title>
+            <a-tabs type="card">
+
+                <!-- <a-tab-pane key="1" tab="jsd.onmicrosoft.cn">
+
+                    <el-table stripe border :data="single_top.jsd" >
+                        <el-table-column prop="rank" label="rank" width="60" align="center"></el-table-column>
+                        <el-table-column prop="item" label="链接"></el-table-column>
+                        <el-table-column prop="value" label="value" width="150">
+                            <template #default="scope">
+                                {{formatBytes(scope.row.value)}}
+                            </template>
+                        </el-table-column>
+                        <el-table-column fixed="right" label="Operations" width="120">
+                            <template #default>
+                              <el-button link type="primary" size="small" @click="handleClick"
+                                >Detail</el-button
+                              >
+                              <el-button link type="primary" size="small">Edit</el-button>
+                            </template>
+                          </el-table-column>
+                    </el-table>
+                
+                
+                </a-tab-pane>
+                <a-tab-pane key="2" tab="npm.onmicrosoft.cn">
+                    
+                      
+                    <el-table stripe border :data="single_top.npm" >
+                        <el-table-column prop="rank" label="rank" width="60" align="center"></el-table-column>
+                        <el-table-column prop="item" label="链接"></el-table-column>
+                        <el-table-column prop="value" label="value" width="150">
+                            <template #default="scope">
+                                {{formatBytes(scope.row.value)}}
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="value" label="tags">
+                            <template #default="scope">
+                                scope.row.value[0]
+                            </template>
+                        </el-table-column>
+                        <el-table-column fixed="right" label="Operations" width="120">
+                            <template #default>
+                              <el-button link type="primary" size="small" @click="handleClick"
+                                >Detail</el-button
+                              >
+                              <el-button link type="primary" size="small">Edit</el-button>
+                            </template>
+                          </el-table-column>
+                    </el-table>
+                
+                
+                </a-tab-pane>
+                <a-tab-pane key="3" tab="cdnjs.onmicrosoft.cn">
+                    
+                    
+                    <el-table stripe border :data="single_top.cdnjs" >
+                        <el-table-column prop="rank" label="rank" width="60" align="center"></el-table-column>
+                        <el-table-column prop="item" label="链接"></el-table-column>
+                        <el-table-column prop="value" label="value" width="150">
+                            <template #default="scope">
+                                {{formatBytes(scope.row.value)}}
+                            </template>
+                        </el-table-column>
+                        <el-table-column fixed="right" label="Operations" width="120">
+                            <template #default>
+                              <el-button link type="primary" size="small" @click="handleClick"
+                                >Detail</el-button
+                              >
+                              <el-button link type="primary" size="small">Edit</el-button>
+                            </template>
+                          </el-table-column>
+                    </el-table>
+                
+                
+                
+                </a-tab-pane> -->
+
+
+                 <!-- v-for重构以上的代码 -->
+                <a-tab-pane v-for="(item,key,index) in single_top" :key="index" :tab="key==='admin'? '管理' :key==='term'? 'Services Terms of Use':key + '.onmicrosoft.cn'">
+                    <div v-if="key!=='admin'">
+                        <div v-if="key==='term'">
+                            <a-typography-paragraph>
+                                <blockquote>
+                                    <a-typography-link :onclick="scrollIntoTerm">Services Terms of Use</a-typography-link> 请在本页面底部的评论区第一条查看。
+                                </blockquote>
+                            </a-typography-paragraph>
+                        </div>
+                        <div v-else>
+                            <el-table stripe border :data="item.slice((top_currentPage-1)*10,top_currentPage*10)" style="width: 100%" table-layout="auto">
+                                <el-table-column prop="rank" label="rank" width="60" align="center"></el-table-column>
+                                <el-table-column prop="item" label="链接" width="600" show-overflow-tooltip></el-table-column>
+                                <el-table-column prop="value" label="value" width="120" >
+                                    <template #default="scope">
+                                        {{formatBytes(scope.row.value)}}
+                                    </template>
+                                </el-table-column>
+
+                                <el-table-column prop="item" label="tags" align="center" >
+                                    <template #default="scope">
+                                        <!-- <el-tag class="ml-2">正常</el-tag> -->
+                                        <!-- <el-tag class="ml-2" type="info">审核中</el-tag> -->
+                                        <!-- <el-tag class="ml-2" type="danger">滥用</el-tag> -->
+                                        <el-tag class="ml-2" :type="Get_status_tag(scope.row.item)">{{Get_status_text(scope.row.item)}}</el-tag>
+                                    </template>
+                                </el-table-column>
+
+
+                                <el-table-column width="160" label="Operations" align="center">
+                                    <template #default="scope">
+                                        <el-popconfirm title="确定要对此链接发起 Abuse 吗?"
+                                        @confirm="handleAbuse(scope.row.item)"
+                                        width="300"
+                                        >
+                                            <template #reference>
+                                                <el-button link type="primary" size="small"
+                                                :disabled="!this.Admin_KEY && Get_status_for(scope.row.item)!=='NORMAL'"
+                                                    >Abuse</el-button
+                                                >
+                                            </template>
+                                        </el-popconfirm>
+                                        <el-button link type="primary" size="small" @click="handleLike(scope.row.item,key,scope.row.rank)"
+                                        >{{Get_status_for(scope.row.item)!=='REJECT'?'Like':'Fuck'}}({{Get_like(scope.row.item,key,scope.row.rank)?like_dict[key+ '_' +scope.row.rank]:0}})</el-button>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+
+
+                            <el-pagination 
+                                style="margin-top: 10px"
+                                @current-change="top_handleCurrentChange"
+                                :current-page="top_currentPage"
+                                :page-size="10" 
+                                :pager-count="isMobile?5:11"
+                                :small="isMobile"
+                                background 
+                                layout="-> ,prev, pager, next"
+                                :total="100"
+                                >
+                            </el-pagination>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <div v-if="Admin_KEY===''">
+                            您好，请验证身份：<el-button type="primary" @click="Admin_login()">X openID 登陆</el-button>
+                            <div>
+                                <a-typography-paragraph>
+                                <blockquote>想要加入管理组吗？加入即可获得<el-button type="primary" link @click="Temp_Show()">以下权限</el-button>，详情请联系 <a-typography-link>admin@icodeq.com</a-typography-link></blockquote>
+                                </a-typography-paragraph>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <div v-if="Temp_SHOW===true">
+                                您好，请验证身份：<el-button type="primary" @click="Admin_login()">X openID 登陆</el-button>
+                                <div>
+                                    <a-typography-paragraph>
+                                    <blockquote>想要加入管理组吗？加入即可获得<el-button type="primary" link @click="Temp_Show()">以下权限</el-button>，详情请联系 <a-typography-link>admin@icodeq.com</a-typography-link></blockquote>
+                                    </a-typography-paragraph>
+                                </div>
+                            </div>
+                        <!-- X openID -->
+                        <!--  -->
+                        <!-- 
+                            # Abuse 分为三个步骤
+                            # 1. 检查链接是否合规（登记状态，若是管理员状态则可以多次 Abuse）【查第一个表】
+                            # 2. 多吉云封禁【要公示么（？）】
+                            # 3. 查户口 登记黑名单【abuse表】
+                         -->
+                         <el-card class="box-card" shadow="never">
+                            <a-typography-paragraph>当前 Abuse 链接：<a-typography-link target="_blank" :href="'https://'+Abuse_Step.PendingReview_Link">{{Abuse_Step.PendingReview_Link}}</a-typography-link></a-typography-paragraph>
+                                    
+                            <blockquote>当前还有 {{Abuse_Step.PendingLength}} 个链接待审核
+                                <el-button type="info" @click="Admin_logout(false)" size="small">退出登陆</el-button>
+                                <el-button type="warning" @click="Admin_logout(true)" size="small">注销登陆</el-button>
+                                <br><br>
+                                若为 font.on 域名，审核滥用自动封禁，审核通过尝试解封。
+                            </blockquote>
+
+                            
+                         </el-card>
+
+                         <a-divider orientation="left">1. 检查链接是否合规（登记状态）</a-divider>
+                            <el-card class="box-card" shadow="never">
+                                <center>
+                                        <el-button type="primary" @click="Mark_as_abuse(Abuse_Step.PendingReview_Link, 'NORMAL')">标记为正常</el-button>
+
+                                        <el-button type="danger" @click="Mark_as_abuse(Abuse_Step.PendingReview_Link, 'REJECT')">标记为滥用</el-button>
+                                    
+                                   
+                                        <el-button type="success" @click="Mark_as_abuse(Abuse_Step.PendingReview_Link, 'PASSED')">标记为通过</el-button>
+                                    
+                                        <el-button type="success" @click="Mark_as_abuse(Abuse_Step.PendingReview_Link, 'TRANSFER')">标记为转发</el-button>
+
+                                        <el-button type="success" @click="Mark_as_abuse(Abuse_Step.PendingReview_Link, 'OFFICIAL')">标记为官网</el-button>
+                                    
+                                        <el-button @click="GetPendingReview(Admin_KEY)">审核下一个</el-button>
+                                </center>
+                            </el-card>
+                         <a-divider orientation="left">2. 多吉云封禁</a-divider>
+
+                        
+                         <el-card class="box-card" shadow="never">
+                            <!-- {{Abuse_Step.step2}} -->
+                            <el-form
+                                :label-position="left"
+                                label-width="100px"
+                                :model="Abuse_Step.step2"
+                            >
+                                <el-form-item label="选择域名">
+                                    <el-select
+                                    v-model="Abuse_Step.step2.domains"
+                                    multiple
+                                    placeholder="Select"
+                                    style="width: 100%"
+                                  >
+                                    <el-option
+                                      v-for="domain in Abuse_Step.domains"
+                                      :key="domain.key"
+                                      :label="domain.key"
+                                      :value="domain.key"
+                                    />
+                                  </el-select>
+                                </el-form-item>
+
+                                <el-form-item label="封禁规则">
+                                    
+                                    <el-select
+                                    v-model="Abuse_Step.step2.methods"
+                                    placeholder="Select"
+                                    style="width: 100%"
+                                  >
+                                    <el-option
+                                      v-for="item in Abuse_Step.block_methods"
+                                      :key="item.key"
+                                      :label="item.key"
+                                      :value="item.key"
+                                    />
+                                  </el-select>
+
+                                </el-form-item>
+
+                                <el-form-item label="填写封禁规则">
+                                    <el-input v-model="Abuse_Step.step2.rule" />
+                                </el-form-item>
+
+                                <el-form-item label="最终正则">
+                                    <el-input disabled v-model="Abuse_Step.step2.regex" />
+                                </el-form-item>
+
+
+                                <center><el-button type="primary" @click="Add_Doge_Abuse_Rule()">添加规则</el-button></center>
+                            </el-form>
+                        </el-card>
+
+                        <el-collapse >
+                            <!-- {{Abuse_Step.doge_abuse}} -->
+                            <el-collapse-item title="jsd.onmicrosoft.cn 封禁规则" name="1">
+                                <el-card class="box-card" shadow="never">
+                                    <el-table
+                                        :data="Abuse_Step.doge_abuse.jsd"
+                                        style="width: 100%"
+                                        border
+                                        height="240"
+                                    >
+                                        <el-table-column label="域名" align="center">
+                                            jsd.onmicrosoft.cn
+                                        </el-table-column>
+                                        <el-table-column prop="type" label="封禁规则" align="center"></el-table-column>
+                                        <el-table-column prop="content" label="正则" align="center"></el-table-column>
+                                        <el-table-column prop="action" label="操作" align="center">
+                                            <template #default="scope">
+                                                <!-- TODO:这个没写完 -->
+                                                <el-button type="danger" size="small" @click="Del_Doge_Abuse_Rule(scope.row, 'jsd')">删除</el-button>
+                                            </template>
+                                        </el-table-column>
+                                    </el-table>
+                                </el-card>
+                            </el-collapse-item>
+                            <el-collapse-item title="npm.onmicrosoft.cn 封禁规则" name="2">
+                                <el-card class="box-card" shadow="never">
+                                    <el-table
+                                        :data="Abuse_Step.doge_abuse.npm"
+                                        style="width: 100%"
+                                        border
+                                        height="240"
+                                    >
+                                        <el-table-column label="域名" align="center">
+                                            npm.onmicrosoft.cn
+                                        </el-table-column>
+                                        <el-table-column prop="type" label="封禁规则" align="center"></el-table-column>
+                                        <el-table-column prop="content" label="正则" align="center"></el-table-column>
+                                        <el-table-column prop="action" label="操作" align="center">
+                                            <template #default="scope">
+                                                <el-button type="danger" size="small" @click="Del_Doge_Abuse_Rule(scope.row, 'npm')">删除</el-button>
+                                            </template>
+                                        </el-table-column>
+                                    </el-table>
+                                </el-card>
+                            </el-collapse-item>
+                            <el-collapse-item title="cdnjs.onmicrosoft.cn 封禁规则" name="3">
+                                <el-card class="box-card" shadow="never">
+                                    <el-table
+                                        :data="Abuse_Step.doge_abuse.cdnjs"
+                                        style="width: 100%"
+                                        border
+                                        height="240"
+                                    >
+                                        <el-table-column prop="domain" label="域名" align="center">
+                                            cdnjs.onmicrosoft.cn
+                                        </el-table-column>
+                                        <el-table-column prop="type" label="封禁规则" align="center"></el-table-column>
+                                        <el-table-column prop="content" label="正则" align="center"></el-table-column>
+                                        <el-table-column prop="action" label="操作" align="center">
+                                            <template #default="scope">
+                                                <el-button type="danger" size="small" @click="Del_Doge_Abuse_Rule(scope.row, 'cdnjs')">删除</el-button>
+                                            </template>
+                                        </el-table-column>
+                                    </el-table>
+                                </el-card>
+                            </el-collapse-item>
+                        </el-collapse>
+                        
+                         <a-divider orientation="left">3. 查户口 登记黑名单</a-divider>
+
+                         <el-card class="box-card" shadow="never">
+                            <!-- {{Abuse_Step.step3}} -->
+                            <el-form
+                                :label-position="left"
+                                label-width="120px"
+                                :model="Abuse_Step.step3"
+                            >
+                                <el-form-item label="昵称">
+                                    <el-input v-model="Abuse_Step.step3.nickname" placeholder="在这里输入小鬼的昵称" />
+                                </el-form-item>
+                                <el-form-item label="Github地址">
+                                    <el-input v-model="Abuse_Step.step3.github" placeholder="在这里输入小鬼的Github地址【免https://】" />
+                                </el-form-item>
+                                <el-form-item label="博客地址">
+                                    <el-input v-model="Abuse_Step.step3.blog" placeholder="在这里输入小鬼的博客地址【完整】" />
+                                </el-form-item>
+                                <el-form-item label="滥用仓库">
+                                    <el-input v-model="Abuse_Step.step3.repo" placeholder="在这里输入小鬼滥用的仓库" />
+                                </el-form-item>
+                                <el-form-item label="说明">
+                                    <el-input v-model="Abuse_Step.step3.reason" placeholder="在这里输入小鬼干了什么下头事情" />
+                                </el-form-item>
+                                <el-form-item label="屏蔽内容">
+                                    <el-input v-model="Abuse_Step.step3.forbidden_content" placeholder="在这里填【referer/url】会被渲染成标签" />
+                                </el-form-item>
+                                <!-- {{Abuse_Step.step3}} -->
+                                <el-form-item label="ID" v-if="Abuse_Step.step3.is_update===true">
+                                    <el-input v-model="Abuse_Step.step3.id" disabled placeholder="在这里填【referer/url】会被渲染成标签" />
+                                </el-form-item>
+                                <center><el-button type="primary" @click="AddBlockList()">{{Abuse_Step.step3.is_update?"更新黑名单":"添加黑名单"}}</el-button><el-button v-if="Abuse_Step.step3.is_update===true" @click="Abuse_Step.step3.is_update=false;Abuse_Step.step3={}">取消更新</el-button></center>
+                            </el-form>
+                         </el-card>
+
+                         <a-divider orientation="left">4. 隐藏某个黑名单</a-divider>
+
+                         <el-card class="box-card" shadow="never">
+                            <el-table
+                                :data="AdminBlacklist"
+                                style="width: 100%"
+                                border
+                                table-layout="auto"
+                            >
+                                <el-table-column prop="id" label="序号" width="60" align="center"></el-table-column>
+                                <el-table-column prop="nickname" width="160" label="昵称"></el-table-column>
+                                <el-table-column prop="repo" width="160" label="滥用仓库"></el-table-column>
+                                <el-table-column prop="reason" width="240" label="说明"></el-table-column>
+                                <el-table-column prop="forbidden_content" width="160" label="屏蔽内容"></el-table-column>
+                                <el-table-column prop="action" fixed="right" width="140" label="操作" align="center">
+                                    <template #default="scope">
+                                        <el-button size="small" :type="scope.row.is_delete?'success':'info'" @click="HideBlockList(scope.row)">{{scope.row.is_delete?'显示':'隐藏'}}</el-button>
+                                        <el-button size="small" type="primary" @click="UpdateBlockList(scope.row)">修改</el-button>
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+                         </el-card>
+
+                        </div>
+                    </div>
+
+                </a-tab-pane>
+
+                
+            </a-tabs>
+            <a-divider />
+        </a-typography-paragraph>
+
+        <a-typography-paragraph>
+            <a-typography-title :level="5">滥用黑名单</a-typography-title>
+            <!-- <a-table :columns="donation.columns" :data-source="donation.data" bordered size="small"></a-table> -->
+            <!-- {{donation.data}} -->
+            <el-table stripe border :data="Blacklist.slice((block_currentPage-1)*10,block_currentPage*10)" style="width: 100%"  >
+                <el-table-column prop="id" label="序号" width="60" fixed align="center"></el-table-column>
+                <el-table-column prop="nickname" label="昵称" :fixed="!isMobile" width="120" align="center" ></el-table-column>
+                <el-table-column prop="github" label="Github地址" width="240" ></el-table-column>
+                <el-table-column prop="blog" label="博客地址" width="235" ></el-table-column>
+                <el-table-column prop="repo" label="滥用仓库" width="210" ></el-table-column>
+                <el-table-column prop="forbidden_content" label="屏蔽内容" width="185" >
+                    <template #default="scope">
+                        <el-tag size="small" v-for="item in (scope.row.forbidden_content).split(',')" type="danger" style="margin: 2px;">
+                            {{item}}
+                        </el-tag>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="reason" label="说明" width="240" ></el-table-column>
+                <el-table-column prop="create_time" label="添加日期" width="240" ></el-table-column>
+            </el-table>
+            <el-pagination 
+            style="margin-top: 10px"
+            @current-change="block_handleCurrentChange"
+            :current-page="block_currentPage"
+            :page-size="10" 
+            :pager-count="isMobile?5:11"
+            :small="isMobile"
+            background 
+            layout="-> ,prev, pager, next"
+            :total="Blacklist.length"
+            :hide-on-single-page="true"
+            >
+        </el-pagination>
+            <blockquote>误封、申诉 等问题，请邮件联系：<a-typography-link>admin@icodeq.com</a-typography-link>
+                <a-typography-paragraph>
+                    <blockquote>
+                        <a-typography-link :onclick="scrollIntoTerm">Services Terms of Use</a-typography-link> 请在本页面底部的评论区第一条查看。
+                    </blockquote>
+                </a-typography-paragraph>
+            </blockquote>
+            <a-divider />
+        </a-typography-paragraph>
+        
+        <!-- {{single_top}} -->
+
+        <!-- Info -->
+        <a-typography-title :level="3">项目宗旨和概述</a-typography-title>
+
+
+        <a-typography-paragraph>
+            在开发者日常的开发和使用中，比如书写某些简单的demo的时候，或者开发一些小工具，小玩意的时候，总会使用到某些前端的静态库，当然
+            <a-typography-text code>cdnjs jsdelivr</a-typography-text> 这样的网站就是为此而生的。
+        </a-typography-paragraph>
+
+        <a-typography-paragraph>
+            但是我们是一群中国的开发者，为此，国外服务商提供的种种服务让我们的网站体验一次次的降级，于是更多的静态资源被放在源站上，但是这仍然解决不了静态资源变慢的问题
+        </a-typography-paragraph>
+
+        <a-typography-paragraph>
+            于是，本项目出现了，由私人搭建的备案域名来使用
+            <a-typography-text code>多吉</a-typography-text> 国内
+            CDN，为开发者提供一个高速简单，开箱即用的公益CDN，本项目的宗旨是：限制更少，更简单，只为开发（<a-typography-text code>Just for
+                Developer</a-typography-text>）。
+        </a-typography-paragraph>
+
+        <a-typography-paragraph>
+            既然做了，那么就要做好，当前阶段每日的流量阈值为 单个域名
+            <a-typography-text code>24GB/24h</a-typography-text>
+            更多详情可在上方的仪表盘中看到
+        </a-typography-paragraph>
+
+        <a-typography-paragraph>
+            <ul>
+                <li>
+                    <a-typography-link target="_blank" href="https://jsd.onmicrosoft.cn/@info">https://jsd.onmicrosoft.cn/
+                    </a-typography-link> （回源 jsdelivr）
+                </li>
+                <li>
+                    <a-typography-link target="_blank"
+                        href="https://npm.onmicrosoft.cn/@info">https://npm.onmicrosoft.cn/</a-typography-link> （回源cdnjs）
+                </li>
+                <li>
+                    <a-typography-link target="_blank"
+                        href="https://cdnjs.onmicrosoft.cn/@info">https://cdnjs.onmicrosoft.cn/</a-typography-link>
+                    （同上，回源cdnjs）
+                </li>
+            </ul>
+        </a-typography-paragraph>
+
+
+        <a-typography-paragraph>
+            我们期望您能够自觉遵守我们的使用限制，为了确保项目的长久发展，请不要滥用本服务。
+        </a-typography-paragraph>
+        <a-typography-paragraph>
+            <blockquote>
+                <a-typography-link :onclick="scrollIntoTerm">Services Terms of Use</a-typography-link> 请在本页面底部的评论区第一条查看。
+            </blockquote>
+        </a-typography-paragraph>
+            <a-typography-paragraph>
+                本项目采用 <a-typography-text code>vercel</a-typography-text> 中转回源，防止部分地区回源失败，感谢
+                <a-typography-text code>vercel</a-typography-text> , we love <a-typography-text
+                    code>vercel</a-typography-text>.
+            </a-typography-paragraph>
+            </a-typography>
+
+
+            <!-- Sponsor -->
+            <a-typography-title :level="3">赞助列表</a-typography-title>
+
+            <a-typography-paragraph>
+                <blockquote>您的每一笔打赏都会被永久记录在表格，为开源项目做出贡献者至高无上！</blockquote>
+            </a-typography-paragraph>
+
+            <!-- {{donation}} -->
+
+            <a-table :columns="donation.columns" :data-source="donation.data" bordered size="middle" >
+
+
+                <template #title>
+                    <div class="afdian_iframe">
+                        <iframe id="afdian_leaflet_icodeq" src="https://afdian.net/leaflet?slug=icodeq" width="100%"
+                            scrolling="no" height="200" frameborder="0"></iframe>
+                    </div>
+                </template>
+
+                <!-- <template #bodyCell>
+                    <template v-if="column.dataIndex==='avatar'">
+                        <a-avatar :src="donation.data" />
+                    </template>
+                </template> -->
+
+                <template #footer>
+                    数据更新于 {{donation.lastupdate}}
+                </template>
+            </a-table>
+            
+            <!--  Footer -->
+
+            <a-divider> <a href="https://github.com/zkeq" target="_blank" style="color: #ff1485;">Made with ❤ by zkeq.</a></a-divider>
+
+            <a-divider orientation="right"><a target="_blank" rel="noopener" style="color: #000;" href="http://beian.miit.gov.cn/">豫ICP备2022013147号</a></a-divider>
+   
+            <a-divider orientation="right"> <a href="https://icp.gov.moe/?keyword=20231314" target="_blank" style="color: #ff1485;">萌ICP备20231314号</a></a-divider>
+
+            <a-divider orientation="right">Produced on December 31, 2022</a-divider>
+
+            <a-divider orientation="left">Special thanks to: <a href="https://github.com/soxft" target="_blank" >@xcsoft</a></a-divider>
+            <el-backtop :right="100" :bottom="100" />
+        </div>
+
+        <!-- Comment -->
+<div class="comment" id="comment_area">
+        <script src="https://giscus.app/client.js"
+        data-repo="Zkeq/Coding"
+        data-repo-id="MDEwOlJlcG9zaXRvcnk0MDc4MDg2MTE="
+        data-mapping="number"
+        data-term="644"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+
+        var app = createApp({
+            data() {
+                return {
+                    donation: {
+                        columns: [
+                        //     {
+                        //     title: '头像',
+                        //     dataIndex: 'avatar',
+                        // },
+                        {
+                            title: '昵称',
+                            dataIndex: 'name',
+                        }, {
+                            title: '金额',
+                            dataIndex: 'money',
+                        }, {
+                            title: '留言',
+                            dataIndex: 'info',
+                        }],
+                        data: [
+
+                        ],
+                        lastupdate: "2022年12月30日 16:51:43"
+                    },
+                    Detail_ALL:{
+                        "traffic": "",
+                        "request": "",
+                        "update": "",
+                        "seconds": ""
+                    },
+                    single_details:{
+                        "jsd": {
+                            "percent": 0,
+                            "total": 25769803776,
+                            "used": 0,
+                        },
+                        "npm": {
+                            "percent": 0,
+                            "total": 25769803776,
+                            "used": 0,
+                        },
+                        "cdnjs": {
+                            "percent": 0,
+                            "total": 25769803776,
+                            "used": 0,
+                        }
+                    },
+                    single_top:{
+                        "jsd":[],
+                        "npm":[],
+                        "cdnjs":[],
+                        "font": [],
+                        "term": "",
+                        "admin": "",
+                    },
+                    top_currentPage: 1,
+                    block_currentPage: 1,
+                    Blacklist: [],
+                    AdminBlacklist:[],
+                    Abuse_Step:{
+                        "PendingReview_Link": "正在获取...",
+                        "PendingLength": -1,
+                        "step1": {
+                            
+                        },
+                        "step2": {
+                            "domains": [],
+                            "methods": "url",
+                            "rule": "",
+                            "regex": ""
+                            
+                        },
+                        "step3": {
+                            "nickname": "",
+                            "github": "",
+                            "blog": "",
+                            "repo": "",
+                            "reason": "",
+                            "forbidden_content": "",
+                            "is_update": false
+                        },
+                        "step4": {
+                            
+                        },
+                        "domains":[
+                            {
+                                "key": "jsd.onmicrosoft.cn"
+                            },
+                            {
+                                "key": "npm.onmicrosoft.cn"
+                            },
+                            {
+                                "key": "cdnjs.onmicrosoft.cn"
+                            },
+                            {
+                                "key": "font.onmicrosoft.cn"
+                            }
+
+                        ],
+                        "block_methods":[
+                            {
+                                "key": "url"
+                            },
+                            {
+                                "key": "referer"
+                            }
+                        ],
+                        "doge_abuse":{
+                            "jsd": [],
+                            "npm": [],
+                            "cdnjs": []
+                        },
+                    },
+                    Admin_KEY: "",
+                    Temp_SHOW: false,
+                    Link_Status: [],
+                    like_dict: {},
+                    isMobile: false
+                }
+            },
+            methods: {
+                GetDetail_ALL() {
+                        axios.get('https://hub.onmicrosoft.cn/cdn.onmicrosoft?total=1')
+                            .then(response => {
+                                // 在这里，this 指向你的组件
+                               this.Detail_ALL.traffic = response.data.traffic,
+                               this.Detail_ALL.request = response.data.request,
+                               this.Detail_ALL.update = response.data.update
+                               console.log("流量总详情🔎信息："+'https://hub.onmicrosoft.cn/cdn.onmicrosoft?total=1')
+                               console.table(this.Detail_ALL);
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            });
+                },
+                GetDetail_single(domains){
+                        axios.get(`https://hub.onmicrosoft.cn/cdn.onmicrosoft?single=${domains}`)
+                        .then(response => {
+                            // 在这里，this 指向你的组件
+                            let data = response.data
+                            let total_byte = data.total_byte
+                            let domain = data.domains
+                            this.single_details[domain].used = total_byte;
+                            // js 保留两位小数 ;
+                            percent = Math.floor((total_byte / this.single_details[domain].total * 100)*100) / 100;
+                            this.single_details[domain].percent = percent
+                            console.log(domain+"单个域名用量百分比🔎信息："+`https://hub.onmicrosoft.cn/cdn.onmicrosoft?single=${domains}`)
+                            console.table(this.single_details[domain]);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                },
+                GetDetail_sponsor(){
+                    axios.get('https://hub.onmicrosoft.cn/sponsor')
+                        .then(response => {
+                            // 在这里，this 指向你的组件
+                            result = response.data;
+                            _sponsor_list = []
+                            // 通过 result.out_trade_no 排序
+                            result = result.sort((a, b) => (a.out_trade_no > b.out_trade_no) ? -1 : 1);
+                            // 循环result
+                            for (let i = 0; i < result.length; i++) {
+                                _sponsor_list.push({
+                                    key: i,
+                                    name: "",
+                                    money: "￥" + result[i].show_amount,
+                                    info: result[i].remark,
+                                    avatar: "",
+                                    user_id: result[i].user_id,
+                                })
+                            }
+                            this.donation.data = _sponsor_list
+                            this.donation.lastupdate = dayjs().format('YYYY年MM月DD日 HH:mm:ss')
+                            console.log("爱发电赞助订单🔎信息："+"https://hub.onmicrosoft.cn/sponsor")
+                            console.table(this.donation.data);
+                            axios.get('https://hub.onmicrosoft.cn/sponsor_info')
+                                .then(response => {
+                                    // 在这里，this 指向你的组件
+                                    // 遍历 donation.data 如果 user_id 相同那么就赋予 name 和 avatar
+                                    for (let i = 0; i < this.donation.data.length; i++) {
+                                        for (let j = 0; j < response.data.length; j++) {
+                                            if (this.donation.data[i].user_id == response.data[j].user_id) {
+                                                this.donation.data[i].name = response.data[j].name
+                                                this.donation.data[i].avatar = response.data[j].avatar
+                                            }
+                                        }
+                                    }
+                                    console.log("爱发电赞助用户详情🔎信息："+"https://hub.onmicrosoft.cn/sponsor_info")
+                                    console.table(this.donation.data);
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                });
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                },
+                GetDetail_top(domain){
+                    axios.get(`https://hub.onmicrosoft.cn/cdn.onmicrosoft/top?domain=${domain}`)
+                        .then(response => {
+                            doge_data = response.data
+                            if (doge_data.code !== 200){
+                                console.log(doge_data.msg)
+                            }else{
+                                total_list = doge_data.data.list
+                                this.single_top[domain] = total_list
+                                console.log(domain+"单个域名TOP100🔎信息："+`https://hub.onmicrosoft.cn/cdn.onmicrosoft/top?domain=${domain}`)
+                                console.table(this.single_top[domain]);
+                            }
+                        })
+                        .catch(error => {
+                            console.log(error);
+                    });
+                },
+                formatBytes(a, b) {
+                    if (0 == a) return "0 B";
+                    var c = 1024, d = b || 2, e = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"], f = Math.floor(Math.log(a) / Math.log(c));
+                    return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f];
+                },
+                RunnerTime(seconds){
+                    // dayjs 这样的秒数 18447204 秒数换算成 XX 月 XX 天
+                    return dayjs.duration(seconds.value, 'seconds').format('M[月]D[天] H[小时]m[分]')
+                },
+                ComputingTime(){
+                    this.Detail_ALL.seconds = Math.floor((new Date().getTime() - new Date("2022-05-31 19:52:18").getTime()) / 1000);
+                },
+                //当前页改变时触发 跳转其他页
+                top_handleCurrentChange(val) {
+                    console.log(`当前页: ${val}`);
+                    this.top_currentPage = val;
+                },
+                block_handleCurrentChange(val){
+                    console.log(`当前页: ${val}`);
+                    this.block_currentPage = val;
+                },
+                handleAbuse(value){
+
+                    if(this.Admin_KEY !== ""){
+                        const formData = new FormData();
+                        formData.append('url', value);
+                        axios.post('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin/make_abuse', formData,
+                                {
+                                    headers: {
+                                        Authorization: this.Admin_KEY
+                                    }
+                                }
+                        )
+                        this.GetLinkStatus(false);
+                        return ;
+                    }
+
+                    console.log(value)
+                    const formData = new FormData();
+                    formData.append('url', value);
+                    axios.post('https://hub.onmicrosoft.cn/cdn.onmicrosoft/public/abuse', formData)
+                    this.GetLinkStatus(false);
+                },
+                handleLike(value, key, rank){
+                    this.like_dict[key + "_" + rank] += 1
+                    const formData = new FormData();
+                    formData.append('url', value);
+                    axios.post('https://hub.onmicrosoft.cn/cdn.onmicrosoft/public/like', formData)
+                },
+                async Get_like(value, key, rank){
+                    if (this.like_dict[key + "_" + rank] !== undefined){
+                        return this.like_dict[key + "_" + rank]
+                    }else{
+                        this.like_dict[key + "_" + rank] = 0
+                    }
+                    // axios 获取到真实值
+                    // ?url={url}
+                    let res =  await axios.get('https://hub.onmicrosoft.cn/cdn.onmicrosoft/public/like',{
+                        params: {
+                            url: value,
+                        }
+                    })
+                    this.like_dict[key + "_" + rank] = res.data.num===null?0:res.data.num 
+                    return 1
+                },
+                GetBlackList(){
+                    axios.get('https://hub.onmicrosoft.cn/cdn.onmicrosoft/public/abuse')
+                        .then(response => {
+                            // 在这里，this 指向你的组件
+                            this.Blacklist = response.data
+                            console.log("全站黑名单公示🔎信息："+"https://hub.onmicrosoft.cn/cdn.onmicrosoft/public/abuse")
+                            console.table(this.Blacklist);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                },
+                GetAdminBlackList(key){
+                    axios.get('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin/abuse',{
+                        headers: {
+                            Authorization: key
+                        }
+                    })
+                        .then(response => {
+                            // 在这里，this 指向你的组件
+                            this.AdminBlacklist = response.data
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                },
+                GetAbuseList(){
+                    const key = this.Admin_KEY;
+                    this.GetPendingReview(key);
+                    this.GetDogeList(key, "jsd");
+                    this.GetDogeList(key, "npm");
+                    this.GetDogeList(key, "cdnjs");
+                    this.GetAdminBlackList(key);
+
+                },
+                GetDogeList(key, domain){
+                    axios.get('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin/get_doge_abuse',{
+                        headers: {
+                            Authorization: key
+                        },
+                        params: {
+                            domain
+                        }
+                    })
+                        .then(response => {
+                            this.Abuse_Step.doge_abuse[domain] = response.data.rules;
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                },
+                GetPendingReview(key){
+                    axios.get('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin/return_pending_review_link',{
+                        headers: {
+                            Authorization: key
+                        }
+                    })
+                        .then(response => {
+                            t_data = response.data;
+                            // 在这里，this 指向你的组件
+                            this.Abuse_Step.PendingReview_Link = t_data.link;
+                            this.Abuse_Step.PendingLength = t_data.totle;
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                },
+                GetLinkStatus(RELOAD=true){
+                    // 
+                    axios.get('https://hub.onmicrosoft.cn/cdn.onmicrosoft/public/links')
+                        .then(response => {
+                            this.Link_Status = response.data;
+                            console.log("TOP100链接违规详情🔎信息："+"https://hub.onmicrosoft.cn/cdn.onmicrosoft/public/links")
+                            console.table(this.Link_Status);
+                            if (RELOAD){
+                                this.GetDetail_single("jsd");
+                                this.GetDetail_single("npm");
+                                this.GetDetail_single("cdnjs");
+                            }
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                },
+                Get_status_tag(url){
+                    let status = this.Get_status_for(url);
+                    // REJECT PASSED PENDING_REVIEW
+                    if (status == "REJECT"){
+                        return "danger"
+                    }else if(status == "PASSED"){
+                        return "success"
+                    }else if(status == "PENDING_REVIEW"){
+                        return "info"
+                    }else if(status == "OFFICIAL"){
+                        return "success"
+                    }else if(status == "TRANSFER"){
+                        return "warning"
+                    }
+                },
+                Get_status_text(url){
+                    let status = this.Get_status_for(url);
+                    // REJECT PASSED PENDING_REVIEW
+                    if (status == "REJECT"){
+                        return "滥用"
+                    }else if(status == "PASSED"){
+                        return "通过"
+                    }else if(status == "PENDING_REVIEW"){
+                        return "审核中"
+                    }else if(status == "OFFICIAL"){
+                        return "官网"
+                    }else if(status == "TRANSFER"){
+                        return "转发"
+                    }else{
+                        return "正常"
+                    }
+                },
+                Get_status_for(url){
+                    let status = "NORMAL";
+                    for (let i = 0; i < this.Link_Status.length; i++) {
+                        if (this.Link_Status[i].url == url){
+                            status = this.Link_Status[i].status;
+                            break;
+                        }
+                    }
+                    return status;
+                },
+                Mark_as_abuse(url, status){
+                    const key = this.Admin_KEY;
+                    const formData = new FormData();
+                    formData.append("url", url);
+                    formData.append("status", status);
+                    axios.post('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin/change_review_link',
+                    formData,
+                    {
+                        headers: {
+                            Authorization: key
+                        },
+                    })
+                        .then(response => {
+                            // 在这里，this 指向你的组件
+                            ElementPlus.ElMessage({
+                                message: response.data,
+                                type: 'success',
+                            })
+                            this.GetLinkStatus(RELOAD=false);
+                        })
+                        .catch(error => {
+                            ElementPlus.ElMessage({
+                                message: error,
+                                type: 'warning',
+                            })
+                        });
+                },
+                Add_Doge_Abuse_Rule(){
+                    if (this.Abuse_Step.step2.domains.length === 0 || this.Abuse_Step.step2.methods=== "" || this.Abuse_Step.step2.regex=== ""){
+                        ElementPlus.ElMessage({
+                            message: "请填写完整",
+                            type: 'warning',
+                        })
+                    }else{
+                        // 遍历this.Abuse_Step.step2.domains
+                        for (let i = 0; i < this.Abuse_Step.step2.domains.length; i++) {
+                            const domain = this.Abuse_Step.step2.domains[i];
+                            const key = this.Admin_KEY;
+                            const _type = this.Abuse_Step.step2.methods;
+                            const regex = this.Abuse_Step.step2.regex;
+                            const formData = new FormData();
+                            formData.append("domain", domain);
+                            formData.append("_type", _type);
+                            formData.append("regex", regex);
+                            axios.post('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin/update_doge_abuse',
+                                formData,
+                                {
+                                    headers: {
+                                        Authorization: key
+                                    }
+                                })
+                                .then(response => {
+                                    // 在这里，this 指向你的组件
+                                    ElementPlus.ElMessage({
+                                        message: response.data,
+                                        type: 'success',
+                                    })
+                                    if (domain === "jsd.onmicrosoft.cn"){
+                                        this.GetDogeList(key, "jsd");
+                                    }else if (domain === "npm.onmicrosoft.cn"){
+                                        this.GetDogeList(key, "npm");
+                                    }else{
+                                        this.GetDogeList(key, "cdnjs");
+                                    }
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                            });
+                    }
+                }},
+                Del_Doge_Abuse_Rule(value, domain){
+                    // 找出value是第几个索引
+                    let index = -1;
+                    let length = this.Abuse_Step.doge_abuse[domain].length;
+                    for (let i = 0; i < length; i++) {
+                        if (this.Abuse_Step.doge_abuse[domain][i] === value){
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index === -1){
+                        ElementPlus.ElMessage({
+                            message: "未找到该规则",
+                            type: 'warning',
+                        })
+                    }else{
+                        const key = this.Admin_KEY;
+                        const formData = new FormData();
+                        formData.append("domains", domain);
+                        formData.append("index", index);
+                        formData.append("length", length);
+                        axios.post('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin/del_doge_abuse',
+                            formData,
+                            {
+                                headers: {
+                                    Authorization: key
+                                },
+                            })
+                            .then(response => {
+                                // 在这里，this 指向你的组件
+                                ElementPlus.ElMessage({
+                                    message: response.data,
+                                    type: 'success',
+                                })
+                                this.GetDogeList(key, domain);
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            });
+                    }
+                },
+                AddBlockList(){
+                    // Abuse_Step.step3 { "nickname": "", "github": "", "blog": "", "repo": "", "reason": "", "forbidden_content": "" }
+                    if (!this.Abuse_Step.step3.nickname||!this.Abuse_Step.step3.github|| !this.Abuse_Step.step3.blog|| !this.Abuse_Step.step3.repo|| !this.Abuse_Step.step3.reason || !this.Abuse_Step.step3.forbidden_content){
+                        ElementPlus.ElMessage({
+                            message: "请填写完整",
+                            type: 'warning',
+                        })
+                    }else{
+                        if(this.Abuse_Step.step3.is_update){
+                            // 更新
+                            const key = this.Admin_KEY;
+                            const formData = new FormData();
+                            // nickname: this.Abuse_Step.step3.nickname,
+                            // github: this.Abuse_Step.step3.github,
+                            // blog: this.Abuse_Step.step3.blog,
+                            // repo: this.Abuse_Step.step3.repo,
+                            // reason: this.Abuse_Step.step3.reason,
+                            // forbidden_content: this.Abuse_Step.step3.forbidden_content,
+                            // _id: this.Abuse_Step.step3.id
+                            formData.append("nickname", this.Abuse_Step.step3.nickname);
+                            formData.append("github", this.Abuse_Step.step3.github);
+                            formData.append("blog", this.Abuse_Step.step3.blog);
+                            formData.append("repo", this.Abuse_Step.step3.repo);
+                            formData.append("reason", this.Abuse_Step.step3.reason);
+                            formData.append("forbidden_content", this.Abuse_Step.step3.forbidden_content);
+                            formData.append("_id", this.Abuse_Step.step3.id)
+                            axios.post('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin/update_black_list',
+                            formData,
+                            {
+                                headers: {
+                                    Authorization: key
+                                }
+                            })
+                                .then(response => {
+                                    // 在这里，this 指向你的组件
+                                    ElementPlus.ElMessage({
+                                        message: response.data,
+                                        type: 'success',
+                                    })
+                                    this.GetBlackList(key);
+                                    this.Abuse_Step.step3 = {};
+                                    this.Abuse_Step.step3.is_update = false;
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                });
+                        }else{
+
+                        const key = this.Admin_KEY;
+                        const formData = new FormData();
+                        formData.append("nickname", this.Abuse_Step.step3.nickname);
+                        formData.append("github", this.Abuse_Step.step3.github);
+                        formData.append("blog", this.Abuse_Step.step3.blog);
+                        formData.append("repo", this.Abuse_Step.step3.repo);
+                        formData.append("reason", this.Abuse_Step.step3.reason);
+                        formData.append("forbidden_content", this.Abuse_Step.step3.forbidden_content);
+                        axios.post('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin/add_black_list',
+                        formData,
+                        {
+                            headers: {
+                                Authorization: key
+                            },
+                        })
+                            .then(response => {
+                                // 在这里，this 指向你的组件
+                                ElementPlus.ElMessage({
+                                    message: response.data,
+                                    type: 'success',
+                                })
+                                this.GetBlackList(key);
+                            })
+                            .catch(error => {
+                                ElementPlus.ElMessage({
+                                    message: error,
+                                    type: 'warning',
+                                })
+                            });
+
+                    }}
+                },
+                HideBlockList(row){
+                    const key = this.Admin_KEY;
+                    _id = row.id;
+                    is_delete = row.is_delete;
+                    const formData = new FormData();
+                    formData.append("_id", _id);
+                    formData.append("is_delete", !is_delete);
+                    axios.post('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin/hide_or_show_black_list',
+                    formData,
+                    {
+                        headers: {
+                            Authorization: key
+                        },
+                    })
+                        .then(response => {
+                            // 在这里，this 指向你的组件
+                            ElementPlus.ElMessage({
+                                message: response.data,
+                                type: 'success',
+                            })
+                            this.GetBlackList();
+                            this.GetAdminBlackList(key);
+                        })
+                        .catch(error => {
+                            ElementPlus.ElMessage({
+                                message: error,
+                                type: 'warning',
+                            })
+                        });
+                },
+                UpdateBlockList(row){
+                    ElementPlus.ElMessage({
+                            message: "请在上方表单中更新",
+                            type: 'success',
+                        })
+                    ElementPlus.ElMessage({
+                            message: row,
+                            type: 'success',
+                        })
+                    // 将数据再次绑定到表单上
+                    this.Abuse_Step.step3 = row;
+                    this.Abuse_Step.step3.is_update = true;
+
+                },
+                Admin_login(){
+                    // 跳转到 https://9420.ltd/api/v1/login?appid=20230106414414&redirect_uri=https://cdn.onmicrosoft.cn/
+                    window.location.href = "https://9420.ltd/v1/20230106414414?redirect_uri=https%3A%2F%2Fhub.onmicrosoft.cn%2Fcdn.onmicrosoft%2Fadmin%2Flogin";
+                },
+                Admin_logout(is_del){
+                    if (is_del){
+                        const key = this.Admin_KEY;
+                        axios.get('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin/logout',{
+                            headers: {
+                                Authorization: key
+                            }
+                        })
+                            .then(response => {
+                                // 在这里，this 指向你的组件
+                                ElementPlus.ElMessage({
+                                    message: response.data,
+                                    type: 'success',
+                                })
+                                localStorage.removeItem("Admin_KEY");
+                                window.location.href = "/"
+                            })
+                    }else{
+                        localStorage.removeItem("Admin_KEY");
+                        window.location.href = "/"
+                    }
+                    
+                },
+                // 如果 ?token= 有值，那么就写入到 localStorage
+                Admin_login_check(){
+                    const url = new URL(location.href);
+                    const err = url.searchParams.get("error");
+                    const token = url.searchParams.get('token');
+                    if (err){
+                        ElementPlus.ElMessage({
+                            message: "登录失败",
+                            type: 'warning',
+                        })
+                    }
+                    if (token){
+                        localStorage.setItem("Admin_KEY", token);
+                        this.Admin_KEY = token;   
+                        this.GetAbuseList();
+                        ElementPlus.ElMessage({
+                            message: "登录成功",
+                            type: 'success',
+                        })
+                        this.Admin_PING(token);
+                        // del token
+                        history.pushState('', '', "/admin"); 
+                    }
+                    if (this.Admin_KEY=== ""){
+                        KEY = localStorage.getItem("Admin_KEY");
+                        if (KEY){
+                            this.Admin_KEY = KEY;
+                            this.GetAbuseList();
+                            this.Admin_PING(KEY);
+                        }
+                    }
+
+                },
+                Admin_PING(key){
+                    axios.get('https://hub.onmicrosoft.cn/cdn.onmicrosoft/admin',{
+                        headers: {
+                            Authorization: key
+                        }
+                    })
+                        .then(response => {
+                            if (response.data === 'Permission denied'){
+                                ElementPlus.ElMessage({
+                                    message: "TOKEN 已经失效",
+                                    type: 'warning',
+                                })
+                                localStorage.removeItem("Admin_KEY");
+                                history.pushState('', '', "/admin");
+                            }
+                            // 在这里，this 指向你的组件
+                            ElementPlus.ElMessage({
+                                message: response.data,
+                                type: 'success',
+                            })
+                        })
+                        .catch(error => {
+                            ElementPlus.ElMessage({
+                                message: error,
+                                type: 'warning',
+                            })
+                        });
+                },
+                Temp_Show(){
+                    if (this.Admin_KEY === true){
+                        this.Admin_KEY = "";
+                        return 0;
+                    }
+                    this.Admin_KEY = true;
+                    this.Temp_SHOW = true;
+                },
+                _isMobile() {
+                    let flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)
+                    return flag;
+                },
+                scrollIntoTerm(){
+                    document.querySelector("#comment_area").scrollIntoView(true);
+                }
+            },
+            watch:{
+                'Abuse_Step.step2.rule':{
+                    handler: function (val, oldVal) {
+                        this.Abuse_Step.step2.rule = val.replace(/(^\s*)|(\s*$)/g, "");
+                        if (this.Abuse_Step.step2.methods === "url"){
+                            // 将 gh/L-20021213/picture 变成 gh\/L-20021213\/picture/i
+                            this.Abuse_Step.step2.regex = "(?i)" + this.Abuse_Step.step2.rule.replace(/\//g, "\\/");
+                        }else{
+                            this.Abuse_Step.step2.regex = this.Abuse_Step.step2.rule;
+                        }
+                    },
+                    deep: true
+                },
+            },
+            // 挂载时
+            mounted() {
+                if (this._isMobile()) {
+                    this.isMobile=true;
+                } 
+                this.Admin_login_check();
+
+                this.GetDetail_ALL();
+                this.ComputingTime();
+                setInterval(()=>{
+                    // 2022-05-31 19:52:18 到现在的秒数
+                    this.ComputingTime()
+                },1000),
+                this.GetDetail_sponsor();
+                
+                this.GetDetail_top("jsd");
+                this.GetDetail_top("npm");
+                this.GetDetail_top("cdnjs");
+                this.GetDetail_top("font");
+                this.GetBlackList();
+                this.GetLinkStatus();
+                console.clear();
+                console.log("╔╦╗┬─┐┬ ┬  ┌┬┐┌─┐  ┌─┐┬─┐┌─┐┌─┐┬ ┬\n ║ ├┬┘└┬┘   │ │ │  ├┤ ├┬┘├┤ └─┐├─┤\n ╩ ┴└─ ┴    ┴ └─┘  └  ┴└─└─┘└─┘┴ ┴      By zkeq (icodeq.com)")
+            },
+        })
+        
+        app.use(antd);
+        app.use(ElementPlus);
+        app.config.errorHandler = () => null;
+        app.config.warnHandler = () => null;
+        app.mount('#app')
+
+        
+    </script>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            baseOption:{
+                color: ["#5470c6", "#91cc75", "#fac858", "#ee6666", "#73c0de", "#3ba272", "#fc8452", "#9a60b4", "#ea7ccc"].sort(() => Math.random() - 0.5).slice(0, 3),
+            title: {
+                text: '近7天流量统计'
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: function (params) {
+                    var relVal = params[0].name
+                    for (var i = 0, l = params.length; i < l; i++) {
+                        // 如果params[i].value是个小数，那么就是MB
+                        if (params[i].value % 1 != 0) {
+                            relVal += '<br/>' + params[i].marker + params[i].seriesName + ' : ' + params[i].value + '(MB)'
+                        } else {
+                            relVal += '<br/>' + params[i].marker + params[i].seriesName + ' : ' + params[i].value + '(次)'
+                        }
+                        
+                    }
+                    return relVal
+                }
+            },
+            legend: {
+                data: ['jsd.onmicrosoft.cn', 'npm.onmicrosoft.cn', 'cdnjs.onmicrosoft.cn']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+                toolbox: {
+                    feature: {
+                        saveAsImage: {},
+                        dataZoom: {
+                            yAxisIndex: "none"
+                        },
+                    }
+                },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: []
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    name: "流量(MB)",
+                },
+                {
+                    type: 'value',
+                    name: "请求数",
+                }
+            ],
+            dataZoom: [ 
+                // {
+                //     type: 'slider',
+                //     show: false,
+                //     xAxisIndex: [0],
+                // },
+                // {
+                //     type: 'slider',
+                //     show: false,
+                //     yAxisIndex: [0],
+                //     // left: '93%',
+                //     // start: 0,
+                //     // end: 100
+                // },
+                {
+                    type: 'inside',
+                    xAxisIndex: [0],
+                },
+                // {
+                //     type: 'inside',
+                //     yAxisIndex: [0],
+                // }
+            ],
+            series: [
+                {
+                    name: 'jsd.onmicrosoft.cn',
+                    type: 'line',
+                    stack: 'JSD_t',
+                    data: [],
+                    itemStyle: { normal: { areaStyle: { type: 'default' }} },
+                    smooth: true
+                },
+                {
+                    name: 'npm.onmicrosoft.cn',
+                    type: 'line',
+                    stack: 'NPM_t',
+                    data: [],
+                    itemStyle: { normal: { areaStyle: { type: 'default' }} },
+                    smooth: true
+                },
+                {
+                    name: 'cdnjs.onmicrosoft.cn',
+                    type: 'line',
+                    stack: 'CDNJS_t',
+                    data: [],
+                    itemStyle: { normal: { areaStyle: { type: 'default' } } },
+                    smooth: true
+                }, {
+                    name: 'jsd.onmicrosoft.cn',
+                    type: 'line',
+                    stack: 'JSD_q',
+                    yAxisIndex: 1,
+                    data: [],
+                    smooth: true
+                },
+                {
+                    name: 'npm.onmicrosoft.cn',
+                    type: 'line',
+                    stack: 'NPM_q',
+                    data: [],
+                    yAxisIndex: 1,
+                    smooth: true
+                },
+                {
+                    name: 'cdnjs.onmicrosoft.cn',
+                    type: 'line',
+                    stack: 'CDNJS_q',
+                    data: [],
+                    yAxisIndex: 1,
+                    smooth: true
+                    }
+                ],
+            },
+            media: [
+
+                {
+                    query: {
+                        maxWidth: 600
+                    },
+                    option: {
+                        legend: {
+                            show: false
+                        },
+                    }
+                }
+
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    <script>
+        function Get_update(domain) {
+            axios.get('https://hub.onmicrosoft.cn/cdn.onmicrosoft?domain=' + domain)
+                .then(response => {
+                    let data = response.data;
+                    let domain = data.domains[0];
+                    let time_list = data.date;
+                    let traffic_data_list = data.traffic_data;
+                    let request_data_list = data.request_data;
+
+                    let _index = option.baseOption.legend.data.indexOf(domain);
+
+
+                    option.baseOption.xAxis.data = time_list;
+                    option.baseOption.series[_index].data = traffic_data_list;
+                    option.baseOption.series[_index + 3].data = request_data_list;
+                   
+                     
+                    done_list.push(domain);
+                    if (done_list.length >= 3) {
+                        myChart.clear();
+                        myChart.setOption(option);
+                        myChart.hideLoading()
+                    }
+
+                })
+                .catch(error => {
+                    console.log(error);
+                    myChart.clear();
+                    myChart.setOption(option);
+                    myChart.hideLoading()
+                });
+        }
+        let done_list = []
+        // 延时1s出现加载动画
+        setTimeout(() => {
+            if (done_list.length !== 3) {
+                myChart.showLoading();
+            }
+        }, 200);
+        Get_update("jsd", option);
+        Get_update("npm", option);
+        Get_update("cdnjs", option);
+        window.addEventListener('resize', myChart.resize);
+    </script>
+
+    <script>document.getElementById("afdian_leaflet_icodeq").width = "100%"</script>
+</body>
+
+</html>
