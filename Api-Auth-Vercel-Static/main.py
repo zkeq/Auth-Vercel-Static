@@ -57,6 +57,11 @@ def read_root(path: str, _: str = Depends(get_current_username)):
         return {
             "message": f"{path} not found"
         }
+    # 如果是文件夹
+    if os.path.isdir(path):
+        return {
+            "message": f"{path} is a directory"
+        }
     return FileResponse(path)
 
 
